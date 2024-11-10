@@ -1,0 +1,24 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Директории сборки
+dist/
+build/
+
+# Логи
+*.log
+
+# Операционные системы
+.DS_Store
+Thumbs.db
+
+# Среда разработки
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Прочие
+.env
