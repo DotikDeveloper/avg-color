@@ -1,19 +1,42 @@
 {
   "name": "avg-color",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "build": "webpack"
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "author": "dotikdeveloper@gmail.com",
   "license": "MIT",
   "description": "calculate average color of image",
+  "keywords": [
+    "average",
+    "color",
+    "image",
+    "nodejs",
+    "library"
+  ],
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/DotikDeveloper/avg-color#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DotikDeveloper/avg-color.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DotikDeveloper/avg-color/issues"
+  },
+  "type": "module",
   "dependencies": {
     "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.0.0",
+    "@types/node": "^22.9.3",
+    "@types/sharp": "^0.31.1",
     "babel-loader": "^8.4.1",
+    "typescript": "^5.7.2",
     "webpack": "^5.0.0",
     "webpack-cli": "^4.0.0",
     "webpack-node-externals": "^3.0.0"

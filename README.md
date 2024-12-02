@@ -1,29 +1,29 @@
 # Avg Color
 
-Библиотека для вычисления среднего цвета изображения с использованием `sharp`.
+A library for calculating the average color of an image.
 
-## Установка
+## Installation
 
 ```bash
 npm install avg-color
 ```
 
-## Использование
+## Usage
 
 ```javascript
-import avc from 'avg-color';
+import avc from "avg-color";
 
-const imagePath = 'path/to/your/image.jpg';
+const imagePath = "path/to/your/image.jpg";
 
 avc(imagePath)
-    .then(color => {
-        console.log('Средний цвет:', color);
-    })
-    .catch(error => {
-        console.error('Ошибка:', error);
-    });
+  .then((color) => {
+    console.log("Average color:", color);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
 ```
 
-## Лицензия
+## License
 
-Этот проект лицензирован под MIT License. Подробности можно найти в файле [LICENSE](./LICENSE.md).
+This project is licensed under the MIT License. Details can be found in the [LICENSE](./LICENSE.md) file.
