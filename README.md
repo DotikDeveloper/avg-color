@@ -11,16 +11,16 @@ npm install avg-color
 ## Usage
 
 ```javascript
-import avc from "avg-color";
+import avc from 'avg-color';
 
-const imagePath = "path/to/your/image.jpg";
+const imagePath = 'path/to/your/image.jpg';
 
 avc(imagePath)
   .then((color) => {
-    console.log("Average color:", color);
+    console.log('Average color:', color);
   })
   .catch((error) => {
-    console.error("Error:", error);
+    console.error('Error:', error);
   });
 ```
 

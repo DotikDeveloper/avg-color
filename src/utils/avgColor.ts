@@ -1,4 +1,4 @@
-import sharp from "sharp";
+import sharp from 'sharp';
 
 export async function avc(src: string): Promise<string | undefined> {
   try {
@@ -7,6 +7,6 @@ export async function avc(src: string): Promise<string | undefined> {
       .toBuffer({ resolveWithObject: true });
     return `rgb(${data[0]}, ${data[1]}, ${data[2]}, ${data[3]})`;
   } catch (error) {
-    console.error("Error processing the image:", error);
+    return undefined;
   }
 }

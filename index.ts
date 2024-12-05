@@ -1,1 +1,1 @@
-export { avc } from "./src/utils/avgColor.js";
+export { avc } from './src/utils/avgColor.js';
