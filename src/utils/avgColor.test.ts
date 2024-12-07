@@ -1,33 +1,47 @@
-import { describe, it, expect, vi } from 'vitest';
-import type { Mock } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { avc } from './avgColor.js';
-import sharp from 'sharp';
-
-vi.mock('sharp');
 
 describe('avc', () => {
-  it('should return the average color of the image', async () => {
-    const mockData = Buffer.from([255, 0, 0, 255]);
-    (sharp as unknown as Mock).mockReturnValue({
-      resize: vi.fn().mockReturnThis(),
-      toBuffer: vi.fn().mockResolvedValue({ data: mockData }),
-    });
+  let mockImage: HTMLImageElement;
+  let mockCanvas: HTMLCanvasElement;
+  let mockContext: CanvasRenderingContext2D;
 
-    const result = await avc('./testImage.png');
-    expect(result).toBe('rgb(255, 0, 0, 255)');
+  beforeEach(() => {
+    mockContext = {
+      drawImage: vi.fn(),
+      getImageData: vi.fn().mockReturnValue({
+        data: new Uint8ClampedArray([255, 0, 0, 255]),
+      }),
+    } as unknown as CanvasRenderingContext2D;
+
+    mockCanvas = {
+      getContext: vi.fn().mockReturnValue(mockContext),
+    } as unknown as HTMLCanvasElement;
+
+    global.document.createElement = vi.fn().mockReturnValue(mockCanvas);
+    global.Image = vi.fn().mockImplementation(() => {
+      mockImage = {
+        onload: () => {},
+        onerror: (event: string | Event) => {},
+        width: 1,
+        height: 1,
+      } as unknown as HTMLImageElement;
+      return mockImage;
+    });
   });
 
-  it('should handle errors', async () => {
-    (sharp as unknown as Mock).mockImplementation(() => {
-      return {
-        resize: vi.fn().mockReturnThis(),
-        toBuffer: vi
-          .fn()
-          .mockRejectedValue(new Error('Error processing the image')),
-      };
-    });
+  it('should return the average color of the image', async () => {
+    const colorPromise = avc('test.jpg');
+    (mockImage.onload as Function)();
 
-    const result = await avc('./testImage.png');
-    expect(result).toBeUndefined();
+    const result = await colorPromise;
+    expect(result).toBe('rgb(255, 0, 0)');
+  });
+
+  it('should handle errors when loading image', async () => {
+    const colorPromise = avc('invalid.jpg');
+    (mockImage.onerror as Function)('Failed to load');
+
+    await expect(colorPromise).rejects.toThrow('Ошибка загрузки изображения');
   });
 });
