@@ -1,4 +1,4 @@
-export const webAvc = (imageUrl: string): Promise<string> => {
+export const avc = (imageUrl: string): Promise<string> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.crossOrigin = 'Anonymous';

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { webAvc } from './webAvgColor.js';
+import { avc } from './avgColor.js';
 
-describe('webAvc', () => {
+describe('avc', () => {
   let mockImage: HTMLImageElement;
   let mockCanvas: HTMLCanvasElement;
   let mockContext: CanvasRenderingContext2D;
@@ -31,7 +31,7 @@ describe('webAvc', () => {
   });
 
   it('should return the average color of the image', async () => {
-    const colorPromise = webAvc('test.jpg');
+    const colorPromise = avc('test.jpg');
     (mockImage.onload as Function)();
 
     const result = await colorPromise;
@@ -39,7 +39,7 @@ describe('webAvc', () => {
   });
 
   it('should handle errors when loading image', async () => {
-    const colorPromise = webAvc('invalid.jpg');
+    const colorPromise = avc('invalid.jpg');
     (mockImage.onerror as Function)('Failed to load');
 
     await expect(colorPromise).rejects.toThrow('Ошибка загрузки изображения');
