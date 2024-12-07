@@ -10,8 +10,12 @@ npm install avg-color
 
 ## Usage
 
+### Web Usage
+
+For use in a web application:
+
 ```javascript
-import avc from 'avg-color';
+import { avc } from 'avg-color';
 
 const imagePath = 'path/to/your/image.jpg';
 
