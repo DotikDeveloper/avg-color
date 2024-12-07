@@ -10,12 +10,34 @@ npm install avg-color
 
 ## Usage
 
+### Server Usage
+
+For server usage (Node.js):
+
 ```javascript
-import avc from 'avg-color';
+import { serverAvc } from 'avg-color';
 
 const imagePath = 'path/to/your/image.jpg';
 
-avc(imagePath)
+serverAvc(imagePath)
+  .then((color) => {
+    console.log('Average color:', color);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+```
+
+### Web Usage
+
+For use in a web application:
+
+```javascript
+import { webAvc } from 'avg-color';
+
+const imagePath = 'path/to/your/image.jpg';
+
+webAvc(imagePath)
   .then((color) => {
     console.log('Average color:', color);
   })

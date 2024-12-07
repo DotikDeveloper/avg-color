@@ -1,6 +1,6 @@
 import sharp from 'sharp';
 
-export async function avc(src: string): Promise<string | undefined> {
+export async function serverAvc(src: string): Promise<string | undefined> {
   try {
     const { data } = await sharp(src)
       .resize(1, 1)
