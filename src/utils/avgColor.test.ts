@@ -16,17 +16,31 @@ describe('avc', () => {
 
     mockCanvas = {
       getContext: vi.fn().mockReturnValue(mockContext),
+      width: 1,
+      height: 1,
     } as unknown as HTMLCanvasElement;
 
-    global.document.createElement = vi.fn().mockReturnValue(mockCanvas);
-    global.Image = vi.fn().mockImplementation(() => {
+    // Mock document.createElement
+    vi.spyOn(document, 'createElement').mockReturnValue(mockCanvas);
+
+    // Mock Image constructor
+    const ImageMock = vi.fn().mockImplementation(() => {
       mockImage = {
         onload: () => {},
-        onerror: (event: string | Event) => {},
+        onerror: () => {},
         width: 1,
         height: 1,
+        crossOrigin: '',
+        src: '',
       } as unknown as HTMLImageElement;
       return mockImage;
+    });
+
+    // Replace window.Image with mock (works in browser environment)
+    Object.defineProperty(window, 'Image', {
+      writable: true,
+      configurable: true,
+      value: ImageMock,
     });
   });
 
@@ -42,6 +56,6 @@ describe('avc', () => {
     const colorPromise = avc('invalid.jpg');
     (mockImage.onerror as Function)('Failed to load');
 
-    await expect(colorPromise).rejects.toThrow('Ошибка загрузки изображения');
+    await expect(colorPromise).rejects.toThrow('Failed to load image');
   });
 });

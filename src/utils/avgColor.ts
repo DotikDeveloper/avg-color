@@ -8,7 +8,7 @@ export const avc = (imageUrl: string): Promise<string> => {
       const context = canvas.getContext('2d');
 
       if (!context) {
-        reject(new Error('Не удалось получить 2d контекст'));
+        reject(new Error('Failed to get 2d context'));
         return;
       }
 
@@ -39,7 +39,7 @@ export const avc = (imageUrl: string): Promise<string> => {
     };
 
     img.onerror = () => {
-      reject(new Error('Ошибка загрузки изображения'));
+      reject(new Error('Failed to load image'));
     };
 
     img.src = imageUrl;

@@ -21,6 +21,12 @@
     "declaration": true,
     "declarationMap": true
   },
-  "include": ["*.ts", "src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": ["index.ts", "src/utils/avgColor.ts"],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "vitest.config.ts",
+    "vitest.setup.ts"
+  ]
 }
